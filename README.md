@@ -1,67 +1,133 @@
-# Ruby Course
+## Getting Started
 
-If you are not familiar with linters and GitHub Actions, read [root level README](../README.md).
+In this project you will learn how to:
 
-## Set-up Rubocop GitHub Action
+- Implement classes and objects in Ruby.
+- Implement encapsulation and inheritance with Ruby.
+- Run a program using the command line.
 
-[Rubocop](https://www.rubocop.org/) is a Ruby static code analyzer (a.k.a. linter) and code formatter. It will enforce many of the guidelines outlined in the community [Ruby Style Guide](https://rubystyle.guide/).
+<a name="readme-top"></a>
 
-This GitHub Action is going to run [Rubocop](https://docs.rubocop.org/en/stable/) to help you find style issues.
+# 📗 Table of Contents
 
-Please do the following **steps in this order**:
+- [📖 About the Project](#about-project)
+  - [🛠 Built With](#built-with)
+    - [Tech Stack](#tech-stack)
+- [💻 Getting Started](#getting-started)
+  - [Setup](#setup)
+  - [Prerequisites](#prerequisites)
+  - [Install](#install)
+  - [Usage](#usage)
+  - [Run tests](#run-tests)
+  - [Deployment](#triangular_flag_on_post-deployment)
+- [👥 Authors](#authors)
+- [🔭 Future Features](#future-features)
+- [🤝 Contributing](#contributing)
+- [⭐️ Show your support](#support)
+- [🙏 Acknowledgements](#acknowledgements)
+- [📝 License](#license)
 
-1. In the first commit of your feature branch create a `.github/workflows` folder and add a copy of [`.github/workflows/linters.yml`](.github/workflows/linters.yml) to that folder.
-    - **Remember** to use the file linked above
-    - **Remember** that `.github` folder starts with a dot.
-2. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-    - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-3. When you open your first pull request you should see the result of the GitHub Actions:
+<!-- PROJECT DESCRIPTION -->
 
-![gh actions checks](../assets/images/gh-actions-rubocop-linters-checks.png)
+# 📖 [OOP school library] <a name="about-project"></a>
 
-Click on the `Details` link to see the full output and the errors that need to be fixed:
+**[OOP school library]** This is an Object Oriented Programming Ruby project.
 
-![gh actions failing checks](../assets/images/gh-actions-rubocop-failing-checks.png)
+## 🛠 Built With <a name="built-with"></a>
 
-## [OPTIONAL]Set-up RSpec GitHub Action
+### Tech Stack <a name="tech-stack"></a>
 
-You can run your tests with GitHub Actions to ensure that they are passing before merging a PR.
+<details>
+  <summary>Ruby</summary>
+  <ul>
+    <li><a href="https://github.com/microverseinc/curriculum-ruby/blob/main/simple-ruby/articles/ruby_installation_instructions.md">Ruby instalation instructions</a></li>
+  </ul>
+</details>
 
-To use the GitHub Action to run your tests, please do the following **steps in this order**:
 
-1. Add a copy of [`.github/workflows/tests.yml`](.github/workflows/tests.yml) to your `.github/workflows` folder.
-    - **Remember** to use the file linked above
-    - Do not modify or delete the [`.github/workflows/linters.yml`](.github/workflows/linters.yml) file that should already be in that folder.
-    - RSpec by default will try to run any file ending in `_spec.rb` inside the `spec` folder. Make sure to follow this convention for your tests files so `rspec` can run your spec files.
-    - You can modify the [`.github/workflows/tests.yml`](.github/workflows/tests.yml) file to better fit your custom needs.
-3. When you open your pull request you should see the result of the GitHub Action:
+## 💻 Getting Started <a name="getting-started"></a>
 
-![gh actions checks](../assets/images/gh-actions-rspec-tests-checks.png)
+OOP school library
 
-Click on the `Details` link of the test action to check the results of your tests.
+### Prerequisites
 
-## Set-up linters in your local env
+In order to run this project you need:
 
-### [RuboCop](https://docs.rubocop.org/en/stable/)
+Ruby 3.0.1 or above
 
-1. Add this line to the `Gemfile`
-    ```
-    gem 'rubocop', '>= 1.0', '< 2.0'
-    ```
-    *not sure how to use Gemfile? Read [this](https://bundler.io/v1.15/guides/bundler_setup.html).*
-2. Run `bundle install`.
-3. Copy [.rubocop.yml](./.rubocop.yml) to the root directory of your project
-4. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-    - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-5. Run `rubocop`.
-6. Fix linter errors.
-7. **IMPORTANT NOTE**: feel free to research [auto-correct options for Rubocop](https://rubocop.readthedocs.io/en/latest/auto_correct/) if you get a flood of errors but keep in mind that correcting style errors manually will help you to make a habit of writing a clean code!
+### Setup
 
-## Troubleshooting
+Clone this repository to your desired folder:
 
-- While using Colorize gem, if you are facing errors with Rspec related to 
-    ```bash
-    LoadError:
-    cannot load such file -- colorize
-    ```
-    please remove ```--deployment``` from line no. [26](https://github.com/shubham14p3/Ruby-capstone-project/blob/ca86784cc88bea7c933e329c0953f07e21bcf6ca/.github/workflows/tests.yml#L16) of test.yml file.
+
+### Install
+
+You don't need to install this project.
+
+### Usage
+
+run ruby school_library.rb
+
+### Run tests
+
+No testing implemented yet
+
+### Deployment
+
+No deployment implemented yet
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- AUTHORS -->
+
+## 👥 Authors <a name="authors"></a>
+
+👤 **Nylbert Victor**
+
+- GitHub: [@Nylbert Victor](https://github.com/redmarverick)
+- Twitter: [@Nylbert Victor](https://twitter.com/MarverickRed)
+- LinkedIn: [Nylbert Victor](https://www.linkedin.com/in/nylbert-victor-397951120/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FUTURE FEATURES -->
+
+## 🔭 Future Features <a name="future-features"></a>
+
+More data
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## 🤝 Contributing <a name="contributing"></a>
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/redmarverick/school_library_people/issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SUPPORT -->
+
+## ⭐️ Show your support <a name="support"></a>
+
+If you like this project give it a star ⭐️
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+**I would like to thank to Microverse for giving this inspiring project**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./MIT.md) licensed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
