@@ -1,10 +1,12 @@
 # person.rb
+require_relative 'nameable'
 
-class Person
+class Person < Nameable
   attr_reader :id
   attr_accessor :name, :age
 
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
+    super()
     @id = generate_id
     @name = name
     @age = age
@@ -21,5 +23,9 @@ class Person
 
   def can_use_services?
     true
+  end
+
+  def correct_name
+    @name.capitalize
   end
 end
