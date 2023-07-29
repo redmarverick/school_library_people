@@ -2,7 +2,7 @@
 require_relative 'person'
 
 class Student < Person
-  def initialize(name = 'Unknown', age = nil, parent_permission: true, classroom)
+  def initialize(classroom, name = 'Unknown', parent_permission: true, age = nil)
     super(name, age, parent_permission: parent_permission)
     @classroom = classroom
   end
@@ -10,4 +10,3 @@ class Student < Person
   def play_hooky
     '¯\\_(ツ)_/¯'
   end
-end
