@@ -1,13 +1,8 @@
-# person.rb
-
-require_relative 'nameable'
-
-class Person < Nameable
+class Person
   attr_reader :id
   attr_accessor :name, :age
 
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
-    super(name, age, parent_permission: parent_permission)
     @id = generate_id
     @name = name
     @age = age
