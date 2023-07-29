@@ -1,8 +1,12 @@
-class Person
+# person.rb
+require_relative 'nameable'
+
+class Person < Nameable
   attr_reader :id
   attr_accessor :name, :age
 
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
+    super()
     @id = generate_id
     @name = name
     @age = age
@@ -22,6 +26,6 @@ class Person
   end
 
   def correct_name
-    @name
+    @name.capitalize
   end
 end
