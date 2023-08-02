@@ -49,7 +49,7 @@ class App
       else
         create_student(name, age, nil, parent_permission: parent_permission)
       end
-    
+
     when 2
       print 'You want to create a teacher. Give me the name [Input the name]: '
       begin
