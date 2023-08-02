@@ -13,7 +13,7 @@ def main(app = nil)
     when 2
       app.show_people
     when 3
-      app.insert_person # Corrected method call
+      app.insert_person
     when 4
       app.insert_book
     when 5
