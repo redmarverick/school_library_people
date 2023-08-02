@@ -4,6 +4,7 @@ require_relative 'teacher'
 require_relative 'classroom'
 require_relative 'book'
 require_relative 'rental'
+require 'date'
 
 class App
   attr_reader :people, :books
@@ -16,46 +17,69 @@ class App
 
   def insert_person
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    choice2 = gets.chomp.to_i
+    choice2 = $stdin.gets.chomp.to_i
     case choice2
     when 1
       print 'You want to create a student. Give me the name [Input the name]: '
-      name = gets.chomp
+      begin
+        name = gets.chomp
+        raise ArgumentError if name.empty? || name.match?(/[^A-Za-z\s]/)
+      rescue ArgumentError
+        puts 'Invalid input. Please enter a valid name.'
+        return
+      end
       print 'Has parent permission? [Y/N]: '
       parent_permission_input = gets.chomp.upcase
-      parent_permission = parent_permission_input == 'Y'
+      if parent_permission_input == 'Y' || parent_permission_input == 'N'
+        parent_permission = parent_permission_input == 'Y'
+      else
+        puts 'Invalid input. Please enter Y or N.'
+        return
+      end
       print 'Give me the age [Input the number for age]: '
-      age = gets.chomp.to_i
-      age_zero?(age) ? return : create_student(name, age, nil, parent_permission: parent_permission)
+      begin
+        age = Integer(gets.chomp)
+      rescue ArgumentError
+        puts 'Invalid input. Please enter a valid integer.'
+        return
+      end
+      if age < 1
+        puts "Invalid age. Please try again\n"
+        return
+      else
+        create_student(name, age, nil, parent_permission: parent_permission)
+      end
+
     when 2
       print 'You want to create a teacher. Give me the name [Input the name]: '
-      name = gets.chomp
+      begin
+        name = gets.chomp
+        raise ArgumentError if name.empty? || name.match?(/[^A-Za-z\s]/)
+      rescue ArgumentError
+        puts 'Invalid input. Please enter a valid name.'
+        return
+      end
       print 'Give me the specialization [Input the specialization]: '
       spec = gets.chomp
       print 'Give me the age [Input the number for age]: '
       age = gets.chomp.to_i
-      age_zero?(age) ? return : create_teacher(name, age, spec)
+      if age.zero?
+        puts "Invalid age. Please try again\n"
+        return
+      else
+        create_teacher(name, age, spec)
+      end
     else
       puts 'Invalid choice. Please try again'
     end
   end
 
   def insert_book
-    print 'You want to create a book. Give me the title [Input the title]: '
+    print 'Give me the title [Input the title]: '
     title = gets.chomp
     print 'Give me the author [Input the author]: '
     author = gets.chomp
     create_book(title, author)
-    puts "\nBook created successfully\n"
-  end
-
-  def age_zero?(age)
-    if age.zero?
-      puts "Invalid age. Please try again\n"
-      true
-    else
-      false
-    end
   end
 
   def insert_rental
@@ -69,48 +93,61 @@ class App
 
     puts 'Select a book from the following list by number'
     show_books_with_index
-    book_index = gets.chomp.to_i
+    begin
+      book_index = Integer(gets.chomp) - 1 # Subtract 1 to convert to array index
+    rescue ArgumentError
+      puts 'Invalid input. Please enter a valid integer.'
+      retry
+    end
 
     puts 'Select a person from the following list by number (not id)'
     show_people_with_index
-    people_index = gets.chomp.to_i
+    begin
+      people_index = Integer(gets.chomp) - 1 # Subtract 1 to convert to array index
+    rescue ArgumentError
+      puts 'Invalid input. Please enter a valid integer.'
+      retry
+    end
 
-    print 'Give me the date [Input the date in format YYYY/MM/DD]: '
-    date = gets.chomp
+    print "Give me the date [Input the date in format YYYY/MM/DD] (or 0 for today's date): "
+    date_input = gets.chomp
 
-    create_rental(date, @books[book_index], @people[people_index])
+    if date_input == '0'
+      date = Date.today
+    else
+      begin
+        date = Date.parse(date_input) # Use ::Date to refer to the Ruby standard library Date class
+      rescue ArgumentError
+        puts 'Invalid date format. Please enter a valid date in format YYYY/MM/DD.'
+        return
+      end
+    end
+
+    begin
+      book = @books.fetch(book_index)
+    rescue IndexError
+      puts 'Invalid book index. Please try again.'
+      return
+    end
+
+    begin
+      person = @people.fetch(people_index)
+    rescue IndexError
+      puts 'Invalid person index. Please try again.'
+      return
+    end
+
+    create_rental(date, book, person)
     puts "\nRental created successfully\n"
   end
 
-  def show_rentals_by_id
-    if @people.empty?
-      puts 'No people in the app yet'
-      puts "\n"
-      return
-    end
-
-    puts 'Select a person from the following list by index:'
-    show_people_with_index
-    person_index = gets.chomp.to_i
-
-    person = @people[person_index]
-
-    if person.nil?
-      puts "Invalid index. No person found."
-      puts "\n"
-      return
-    end
-
-    rentals = rentals(person.id)
-    if rentals.empty?
-      puts "No rentals found for #{person.name} (ID: #{person.id})"
+  def age_zero?(age)
+    if age.zero?
+      puts "Invalid age. Please try again\n"
+      true
     else
-      puts 'Rentals:'
-      rentals.each do |rental|
-        puts "Date: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}"
-      end
+      false
     end
-    puts "\n"
   end
 
   def create_student(name = 'Unknown', age = nil, classroom = nil, parent_permission: true)
@@ -127,6 +164,28 @@ class App
     @classrooms.each_with_index do |classroom, index|
       puts "#{index}. Classroom Label: #{classroom.label}"
     end
+  end
+
+  def show_rentals_by_id
+    puts 'Enter the index of the client to see their rentals:'
+    show_people_with_index
+    client_index = gets.chomp.to_i
+    person = @people[client_index]
+
+    if person.nil?
+      puts "Invalid client index. Please try again."
+    else
+      rentals = rentals(person.id)
+      if rentals.empty?
+        puts "No rentals found for #{person.name} (ID: #{person.id})"
+      else
+        puts "List of Rentals for #{person.name} (ID: #{person.id})"
+        rentals.each do |rental|
+          puts "Date: #{rental.date}, Book: #{rental.book.title}, Author: #{rental.book.author}"
+        end
+      end
+    end
+    puts "\n"
   end
 
   def create_book(title = nil, author = nil)
