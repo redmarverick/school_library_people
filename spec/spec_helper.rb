@@ -1,0 +1,11 @@
+require_relative 'book_spec'
+require_relative 'person_spec'
+require_relative 'student_spec'
+require_relative 'classrom_spec'
+require_relative 'rental_spec'
+require_relative 'nameable_spec'
+require_relative 'decorator_spec'
+require_relative 'cap_decorator_spec'
+require_relative 'trim_decorator_spec'
+
+require 'yaml'
