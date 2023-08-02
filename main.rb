@@ -3,6 +3,7 @@ require_relative 'app'
 @app = App.new
 
 def main(app = nil)
+  app.load_data_from_json
   loop do
     menu
     choice = gets.chomp.to_i
@@ -20,6 +21,7 @@ def main(app = nil)
     when 6
       app.show_rentals_by_id
     when 7
+      app.save_data_to_json
       break
     else
       puts 'Invalid choice. Please try again'
