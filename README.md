@@ -90,7 +90,7 @@ No deployment implemented yet
 
 👤 **Gerson Higgins**
 
--GitHub: [@Gerosn Higgins](https://github.com/gersonhiggins)
+-GitHub: [@Gerson Higgins](https://github.com/gersonhiggins)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

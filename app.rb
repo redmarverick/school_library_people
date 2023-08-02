@@ -157,7 +157,7 @@ class App
     puts 'Select a book from the following list by number'
     show_books_with_index
     begin
-      book_index = Integer(gets.chomp) - 1 # Subtract 1 to convert to array index
+      book_index = Integer(gets.chomp) - 1
     rescue ArgumentError
       puts 'Invalid input. Please enter a valid integer.'
       retry
@@ -166,7 +166,7 @@ class App
     puts 'Select a person from the following list by number (not id)'
     show_people_with_index
     begin
-      people_index = Integer(gets.chomp) - 1 # Subtract 1 to convert to array index
+      people_index = Integer(gets.chomp) - 1
     rescue ArgumentError
       puts 'Invalid input. Please enter a valid integer.'
       retry
@@ -179,7 +179,7 @@ class App
       date = Date.today
     else
       begin
-        date = Date.parse(date_input) # Use ::Date to refer to the Ruby standard library Date class
+        date = Date.parse(date_input)
       rescue ArgumentError
         puts 'Invalid date format. Please enter a valid date in format YYYY/MM/DD.'
         return
