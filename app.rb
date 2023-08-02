@@ -4,6 +4,7 @@ require_relative 'teacher'
 require_relative 'classroom'
 require_relative 'book'
 require_relative 'rental'
+require 'date'
 
 class App
   attr_reader :people, :books
@@ -73,6 +74,14 @@ class App
     end
   end
 
+  def insert_book
+    print 'Give me the title [Input the title]: '
+    title = gets.chomp
+    print 'Give me the author [Input the author]: '
+    author = gets.chomp
+    create_book(title, author)
+  end
+
   def insert_rental
     if @people.empty?
       puts "No people in the app yet. Add some people first to make a rental\n"
@@ -85,7 +94,7 @@ class App
     puts 'Select a book from the following list by number'
     show_books_with_index
     begin
-      book_index = Integer(gets.chomp)
+      book_index = Integer(gets.chomp) - 1 # Subtract 1 to convert to array index
     rescue ArgumentError
       puts 'Invalid input. Please enter a valid integer.'
       retry
@@ -94,18 +103,24 @@ class App
     puts 'Select a person from the following list by number (not id)'
     show_people_with_index
     begin
-      people_index = Integer(gets.chomp)
+      people_index = Integer(gets.chomp) - 1 # Subtract 1 to convert to array index
     rescue ArgumentError
       puts 'Invalid input. Please enter a valid integer.'
       retry
     end
 
-    print 'Give me the date [Input the date in format YYYY/MM/DD]: '
-    begin
-      date = Date.parse(gets.chomp)
-    rescue ArgumentError
-      puts 'Invalid date format. Please enter a valid date in format YYYY/MM/DD.'
-      return
+    print "Give me the date [Input the date in format YYYY/MM/DD] (or 0 for today's date): "
+    date_input = gets.chomp
+
+    if date_input == '0'
+      date = Date.today
+    else
+      begin
+        date = Date.parse(date_input) # Use ::Date to refer to the Ruby standard library Date class
+      rescue ArgumentError
+        puts 'Invalid date format. Please enter a valid date in format YYYY/MM/DD.'
+        return
+      end
     end
 
     begin
@@ -149,6 +164,28 @@ class App
     @classrooms.each_with_index do |classroom, index|
       puts "#{index}. Classroom Label: #{classroom.label}"
     end
+  end
+
+  def show_rentals_by_id
+    puts 'Enter the index of the client to see their rentals:'
+    show_people_with_index
+    client_index = gets.chomp.to_i
+    person = @people[client_index]
+
+    if person.nil?
+      puts "Invalid client index. Please try again."
+    else
+      rentals = rentals(person.id)
+      if rentals.empty?
+        puts "No rentals found for #{person.name} (ID: #{person.id})"
+      else
+        puts "List of Rentals for #{person.name} (ID: #{person.id})"
+        rentals.each do |rental|
+          puts "Date: #{rental.date}, Book: #{rental.book.title}, Author: #{rental.book.author}"
+        end
+      end
+    end
+    puts "\n"
   end
 
   def create_book(title = nil, author = nil)
