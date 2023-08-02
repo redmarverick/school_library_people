@@ -88,6 +88,11 @@ No deployment implemented yet
 - Twitter: [@Nylbert Victor](https://twitter.com/MarverickRed)
 - LinkedIn: [Nylbert Victor](https://www.linkedin.com/in/nylbert-victor-397951120/)
 
+👤 **Gerson Higgins**
+
+-GitHub: [@Gerosn Higgins](https://github.com/gersonhiggins)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
