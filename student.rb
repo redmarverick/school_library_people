@@ -14,7 +14,6 @@ class Student < Person
     '¯\\_(ツ)_/¯'
   end
 
-  # Convert a Student object to a hash
   def to_hash
     {
       'type' => 'Student',

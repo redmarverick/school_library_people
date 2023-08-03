@@ -1,6 +1,6 @@
 # capitalize_decorator.rb
 require_relative 'decorator'
-require_relative 'nameable' # Add this line to require the Nameable class
+require_relative 'nameable'
 
 class CapitalizeDecorator < Decorator
   def initialize(nameable)

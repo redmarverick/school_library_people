@@ -7,5 +7,6 @@ require_relative 'nameable_spec'
 require_relative 'decorator_spec'
 require_relative 'cap_decorator_spec'
 require_relative 'trim_decorator_spec'
+require_relative 'solver_spec'
 
 require 'yaml'

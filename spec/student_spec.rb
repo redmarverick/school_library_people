@@ -1,7 +1,7 @@
 # student_spec.rb
 
 require_relative '../student'
-require_relative '../classroom'  # Include Classroom class
+require_relative '../classroom'
 
 RSpec.describe Student do
   describe '#initialize' do

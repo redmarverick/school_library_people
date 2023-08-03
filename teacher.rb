@@ -9,7 +9,6 @@ class Teacher < Person
     @specialization = specialization
   end
 
-  # Convert a Teacher object to a hash
   def to_hash
     {
       'type' => 'Teacher',
