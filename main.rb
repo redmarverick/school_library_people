@@ -42,4 +42,4 @@ def menu
 end
 
 puts 'Welcome to School Library App!'
-main(@app) # This line starts the application.
+main(@app)
