@@ -5,6 +5,7 @@ require_relative 'classroom'
 require_relative 'book'
 require_relative 'rental'
 require 'date'
+require 'json'
 
 class App
   attr_reader :people, :books
@@ -13,6 +14,68 @@ class App
     @books = []
     @people = []
     @rentals = []
+  end
+
+  def save_data_to_json
+    save_books_to_json
+    save_people_to_json
+    save_rentals_to_json
+  end
+
+  def load_data_from_json
+    load_books_from_json
+    load_people_from_json
+    load_rentals_from_json
+  end
+
+  def save_books_to_json
+    File.open('books.json', 'w') do |file|
+      data = @books.map { |book| book.to_hash }
+      file.write(JSON.pretty_generate(data))
+    end
+  end
+
+  def load_books_from_json
+    if File.exist?('books.json')
+      data = JSON.parse(File.read('books.json'))
+      @books = data.map { |hash| Book.from_hash(hash) }
+    end
+  end
+
+  def save_people_to_json
+    File.open('people.json', 'w') do |file|
+      data = @people.map { |person| person.to_hash }
+      file.write(JSON.pretty_generate(data))
+    end
+  end
+
+  def load_people_from_json
+    if File.exist?('people.json')
+      data = JSON.parse(File.read('people.json'))
+      @people = data.map do |hash|
+        if hash['type'] == 'Student'
+          Student.from_hash(hash)
+        elsif hash['type'] == 'Teacher'
+          Teacher.from_hash(hash)
+        else
+          Person.from_hash(hash)
+        end
+      end
+    end
+  end
+
+  def save_rentals_to_json
+    File.open('rentals.json', 'w') do |file|
+      data = @rentals.map { |rental| rental.to_hash }
+      file.write(JSON.pretty_generate(data))
+    end
+  end
+
+  def load_rentals_from_json
+    if File.exist?('rentals.json')
+      data = JSON.parse(File.read('rentals.json'))
+      @rentals = data.map { |hash| Rental.from_hash(hash) }
+    end
   end
 
   def insert_person
